@@ -335,10 +335,10 @@ tailings_flow = float(
     tailings["total_wet_flow_kg_hr"]
 )
 
-fresh_feed_flow = float(
-    feed["total_wet_flow_kg_hr"]
-)
+# Use the selected Aspen case summary as the fresh-feed source.
+fresh_feed_flow = float(case["feed_rate_kg_hr"])
 
+# Water addition remains read from the Aspen WATER stream.
 water_addition = float(
     water["total_wet_flow_kg_hr"]
 )
