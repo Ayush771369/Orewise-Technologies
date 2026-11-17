@@ -1,0 +1,27 @@
+OREWISE TECHNOLOGIES — MULTI-CASE PROCESSING REPORT
+=======================================================
+Successfully processed cases: 9
+
+ASPEN CASES
+case_id  feed_rate_kg_hr  psd_id   F80_mm   P80_mm  hematite_recovery_pct  concentrate_grade_dry_pct  external_mass_balance_error_pct
+ 1000_1             1000       1 6.795713 4.314286                   85.0                  73.913043                     9.473903e-14
+ 1000_2             1000       2 4.962443 4.314286                   85.0                  73.913043                     9.473903e-14
+ 1000_3             1000       3 8.334427 4.314286                   85.0                  73.913043                     9.473903e-14
+ 1250_1             1250       1 6.795713 4.314286                   85.0                  73.913043                     9.473903e-14
+ 1250_2             1250       2 4.962443 4.314286                   85.0                  73.913043                     9.473903e-14
+ 1250_3             1250       3 8.334427 4.314286                   85.0                  73.913043                     9.473903e-14
+  750_1              750       1 6.795713 4.314286                   85.0                  73.913043                     9.473903e-14
+  750_2              750       2 4.962443 4.314286                   85.0                  73.913043                     9.473903e-14
+  750_3              750       3 8.334427 4.314286                   85.0                  73.913043                     9.473903e-14
+
+IMPORTANT MODELLING NOTES
+- Aspen stream and separator results are imported from each workbook.
+- The G-SEP separator uses specified component split fractions.
+- Settling and partition outputs are Python estimates, not Aspen outputs.
+- Mineral-specific size distributions are not available; the same PSD is assumed for both minerals.
+- Screen aperture is assumed to be 1.0 mm and must be checked against Aspen.
+- Bond work index values are sensitivity assumptions, not measured ore properties.
+- The idealised grade-recovery curve is not a validated separator model.
+
+Failed files:
+[]
