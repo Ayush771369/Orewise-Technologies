@@ -1,50 +1,112 @@
+
 import streamlit as st
 import pandas as pd
 from pathlib import Path
-import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT))
-from calculations.interpolation import interpolate_results, load_dataset
+csv_path = ROOT / "data" / "aspen_stream_results.csv"
 
-st.title("Plant Simulator")
-st.caption("Dataset-driven demonstration — replace the illustrative CSV with Aspen-exported results.")
+st.title("Aspen Plus Simulation Results")
+st.caption("Results imported from the uploaded Aspen Plus project.")
 
-csv_path = ROOT / "data" / "aspen_results_sample.csv"
-df = load_dataset(csv_path)
+df = pd.read_csv(csv_path)
 
-st.sidebar.header("Operating conditions")
-feed_min, feed_max = int(df.feed_rate_kg_hr.min()), int(df.feed_rate_kg_hr.max())
-p80_min, p80_max = int(df.grind_p80_um.min()), int(df.grind_p80_um.max())
+conc = df[df["stream_id"] == "CONC"].iloc[0]
+tail = df[df["stream_id"] == "TAIL"].iloc[0]
+feed = df[df["stream_id"] == "ORE-FEED"].iloc[0]
+water = df[df["stream_id"] == "WATER"].iloc[0]
 
-feed = st.sidebar.slider("Feed rate (kg/h)", feed_min, feed_max, 1000, 100)
-p80 = st.sidebar.slider("Grinding product P80 (µm)", p80_min, p80_max, 500, 50)
+# Calculate performance indicators
+recovery = (
+    conc["hematite_kg_hr"] /
+    feed["hematite_kg_hr"] * 100
+)
 
-try:
-    result = interpolate_results(df, feed, p80)
-    st.subheader("Estimated results from the supplied dataset")
-    a, b, c = st.columns(3)
-    a.metric("Concentrate flow", f"{result['concentrate_mass_kg_hr']:.1f} kg/h")
-    b.metric("Hematite recovery", f"{result['hematite_recovery_pct']:.1f}%")
-    c.metric("Concentrate hematite", f"{result['concentrate_hematite_wt_pct']:.1f} wt%")
+grade_dry = (
+    conc["hematite_kg_hr"] /
+    (conc["hematite_kg_hr"] + conc["quartz_kg_hr"]) * 100
+)
 
-    d, e = st.columns(2)
-    d.metric("Tailings flow", f"{result['tailings_mass_kg_hr']:.1f} kg/h")
-    e.metric("Tailings hematite", f"{result['tailings_hematite_wt_pct']:.1f} wt%")
+grade_wet = (
+    conc["hematite_kg_hr"] /
+    conc["total_kg_hr"] * 100
+)
 
-    st.subheader("Effect of grinding size at the selected feed rate")
-    curve = df[df.feed_rate_kg_hr == feed].sort_values("grind_p80_um")
-    if not curve.empty:
-        st.line_chart(curve.set_index("grind_p80_um")[[
-            "hematite_recovery_pct", "concentrate_hematite_wt_pct"
-        ]])
-        st.caption("X-axis: grinding product P80 (µm). Y-axis: percentage.")
-    st.subheader("Interpolated values")
-    st.dataframe(pd.DataFrame([result]).round(2), use_container_width=True)
-except ValueError as exc:
-    st.error(str(exc))
+quartz_rejection = (
+    tail["quartz_kg_hr"] /
+    feed["quartz_kg_hr"] * 100
+)
+
+# Performance indicators
+st.subheader("Plant Performance")
+
+c1, c2, c3, c4 = st.columns(4)
+
+c1.metric("Concentrate Flow", f"{conc['total_kg_hr']:.1f} kg/h")
+c2.metric("Hematite Recovery", f"{recovery:.1f}%")
+c3.metric("Concentrate Grade", f"{grade_dry:.2f}%")
+c4.metric("Quartz Rejection", f"{quartz_rejection:.1f}%")
+
+st.divider()
+
+# Stream results
+st.subheader("Aspen Stream Results")
+
+st.dataframe(
+    df,
+    use_container_width=True,
+    hide_index=True
+)
+
+st.divider()
+
+# Product composition chart
+st.subheader("Product Composition")
+
+chart_data = pd.DataFrame({
+    "Hematite": [
+        conc["hematite_kg_hr"],
+        tail["hematite_kg_hr"]
+    ],
+    "Quartz": [
+        conc["quartz_kg_hr"],
+        tail["quartz_kg_hr"]
+    ],
+    "Water": [
+        conc["water_kg_hr"],
+        tail["water_kg_hr"]
+    ]
+}, index=["Concentrate", "Tailings"])
+
+st.bar_chart(chart_data)
+
+st.divider()
+
+# Mass balance
+st.subheader("Overall Mass Balance")
+
+input_flow = feed["total_kg_hr"] + water["total_kg_hr"]
+output_flow = conc["total_kg_hr"] + tail["total_kg_hr"]
+
+a, b, c = st.columns(3)
+
+a.metric("Total Input", f"{input_flow:.1f} kg/h")
+b.metric("Total Output", f"{output_flow:.1f} kg/h")
+c.metric(
+    "Mass Balance Difference",
+    f"{input_flow - output_flow:.2f} kg/h"
+)
+
+st.write(
+    f"**Dry-basis concentrate grade:** {grade_dry:.2f} wt%"
+)
+
+st.write(
+    f"**Wet-basis concentrate hematite fraction:** {grade_wet:.2f} wt%"
+)
 
 st.info(
-    "Valid range is limited to the minimum and maximum values in the CSV. "
-    "The app does not extrapolate outside this range."
+    "These results represent one saved Aspen simulation case. "
+    "Additional Aspen simulations are required to study how "
+    "performance changes with operating conditions."
 )

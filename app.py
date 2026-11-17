@@ -16,22 +16,15 @@ c1.metric("Design feed rate", "1,000 kg/h")
 c2.metric("Hematite in feed", "40 wt%")
 c3.metric("Quartz in feed", "60 wt%")
 
-st.markdown("### The proposed process")
+st.markdown("### Current Aspen Process")
+
 st.write(
-    "Raw ore → Jaw crusher → Vibrating screen → Wet grinding → "
-    "Hydrocyclone/classifier → Spiral concentrator → Concentrate + tailings"
-)
-st.info(
-    "This is a preliminary educational design. The sample simulator dataset is "
-    "illustrative only and must be replaced with verified Aspen Plus V14 results "
-    "before reporting plant performance."
+    "Fresh Ore → Mixer → Crusher → Screen → "
+    "Water Addition → Separator → Concentrate + Tailings"
 )
 
-st.markdown("### Explore the project")
-st.markdown("""
-Use the pages in the sidebar:
-- **Our Process:** equipment sequence and stream descriptions.
-- **Plant Simulator:** explore the supplied illustrative dataset.
-- **Engineering:** assumptions, Python particle calculation and data notes.
-- **Market & Competitors:** the competitor landscape supplied in the project context.
-""")
+st.info(
+    "The website includes stream results from the uploaded "
+    "Aspen Plus simulation. The current dataset represents "
+    "one saved operating case."
+)

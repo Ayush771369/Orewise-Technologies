@@ -1,0 +1,10 @@
+
+stream_id,description,hematite_kg_hr,quartz_kg_hr,water_kg_hr,total_kg_hr
+ORE-FEED,Fresh ore feed,400,600,0,1000
+WATER,Water addition,0,0,1200,1200
+MIXED-F,Crusher feed incl recycle,1332.97787,1999.46681,0,3332.44468
+O-F,Screen oversize recycle,932.977873,1399.46681,0,2332.44468
+U-F,Screen undersize,400,600,0,1000
+MIXED,Undersize plus water,400,600,1200,2200
+CONC,Separator concentrate,340,120,60,520
+TAIL,Separator tailings,60,480,1140,1680
