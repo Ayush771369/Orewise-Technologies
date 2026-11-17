@@ -29,7 +29,7 @@ from openpyxl import load_workbook
 
 ROOT = Path(__file__).resolve().parents[1]
 
-RAW_DIR = ROOT / "data" / "aspen_raw"
+RAW_DIR = ROOT / "datas" / "aspen_raw"
 OUTPUT_DIR = ROOT / "data"
 
 SCREEN_APERTURE_MM = 1.0
