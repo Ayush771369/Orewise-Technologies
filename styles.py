@@ -25,15 +25,17 @@ COLORS = {
 # SAFE HTML RENDERING HELPER
 # ==========================================================
 
+
 def render_html(markup):
-    """Remove indentation and render HTML instead of code."""
+    """
+    Render trusted HTML directly using Streamlit's HTML renderer.
+    Avoid Markdown parsing so HTML is never displayed as code.
+    """
 
     clean_markup = textwrap.dedent(markup).strip()
 
-    st.markdown(
-        clean_markup,
-        unsafe_allow_html=True
-    )
+    st.html(clean_markup)
+
 
 
 # ==========================================================
