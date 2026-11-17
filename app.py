@@ -38,99 +38,34 @@ load_css()
 
 with st.sidebar:
 
-    st.markdown(
-        """
-        <div style="padding: 15px 5px 25px 5px;">
+    st.markdown("## ⛏️ OREWISE")
 
-            <div style="
-                display:flex;
-                align-items:center;
-                gap:12px;
-            ">
-
-                <div style="
-                    width:44px;
-                    height:44px;
-                    background:#E69B45;
-                    color:#142638;
-                    border-radius:10px;
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
-                    font-size:23px;
-                    font-weight:900;
-                ">
-                    O
-                </div>
-
-                <div>
-                    <div style="
-                        color:white;
-                        font-size:21px;
-                        font-weight:900;
-                        letter-spacing:1px;
-                    ">
-                        OREWISE
-                    </div>
-
-                    <div style="
-                        color:#ADBCC9;
-                        font-size:8px;
-                        letter-spacing:2px;
-                        font-weight:700;
-                    ">
-                        MINERAL TECHNOLOGIES
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-        <hr style="border-color:#354B5E;">
-        """,
-        unsafe_allow_html=True
-    )
-
-    st.markdown(
-        """
-        <div style="
-            color:#E69B45;
-            font-size:10px;
-            letter-spacing:2px;
-            font-weight:800;
-            margin-bottom:8px;
-        ">
-            PROJECT NAVIGATION
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-    st.caption("Explore the OreWise engineering platform.")
+    st.caption("MINERAL PROCESSING TECHNOLOGIES")
 
     st.divider()
 
+    st.caption("PROJECT NAVIGATION")
+
+    st.write("Explore the OreWise engineering platform.")
+
+    st.divider()
+
+    st.caption("PROJECT")
+
+    st.markdown("**Low-Cost Mineral Processing**")
+
+    st.caption("DESIGN CAPACITY")
+
     st.markdown(
-        """
-        <div style="
-            color:#AEBCC8;
-            font-size:11px;
-            line-height:1.8;
-        ">
-            PROJECT<br>
-            <span style="color:white;font-weight:700;">
-                Low-Cost Mineral Processing
-            </span>
-            <br><br>
-            DESIGN CAPACITY<br>
-            <span style="color:#E69B45;font-weight:700;">
-                1 Tonne / Hour
-            </span>
-        </div>
-        """,
+        "<span style='color:#E69B45;font-weight:800;'>"
+        "1 Tonne / Hour"
+        "</span>",
         unsafe_allow_html=True
     )
+
+    st.divider()
+
+    st.caption("ChE 303 | Fluid Particle Systems")
 
 
 # ==========================================================
