@@ -1,0 +1,43 @@
+OREWISE — PYTHON POST-PROCESSING SUMMARY
+========================================
+Input Aspen file: aspen_1000_1(1).xlsx
+Fresh ore feed stream: 1000.000 kg/h
+Crusher feed (fresh + recycle): 3332.445 kg/h
+Crusher product / screen feed stream: 3332.445 kg/h
+Screen undersize: 1000.000 kg/h
+Screen oversize: 2332.445 kg/h
+Concentrate: 460.000 kg/h
+Tailings: 540.000 kg/h
+Concentrate + tailings vs fresh feed balance error: 3.29692e-13 %
+
+Hematite feed: 400.000 kg/h
+Hematite in concentrate: 340.000 kg/h
+Silica feed: 600.000 kg/h
+Silica in concentrate: 120.000 kg/h
+Aspen SEP hematite recovery: 85.000 %
+Aspen SEP concentrate grade: 73.913 %
+Aspen SEP silica recovery to concentrate: 20.000 %
+
+Screen aperture used in calculation: 1.000 mm (verify against Aspen block)
+Fines recovery to undersize: 90.000 %
+Coarse recovery to oversize: 93.322 %
+Correct placement efficiency (mass correctly routed / screen feed): 92.392 %
+Misplaced fines: 93.308 kg/h
+Misplaced coarse particles: 160.224 kg/h
+
+Crusher feed F80 (MIXED-F, includes recycle): 6.7957 mm (6795.7 micrometres)
+Crusher product P80: 4.3143 mm (4314.3 micrometres)
+Bond Wi is not supplied by the Aspen export; see bond_crusher_power.csv.
+
+Slurry solids mass fraction from 1000 kg/h solids + 1200 kg/h water: 45.45 %
+Estimated slurry solids volume fraction: 20.09 %
+100 um hematite settling velocity: 0.0205629 m/s; Re=2.304
+100 um quartz settling velocity: 0.0088094 m/s; Re=0.9869
+100 um Stokes estimate hematite: 0.0260348 m/s
+100 um Stokes estimate quartz: 0.0101188 m/s
+Stokes equal-settling diameter ratio d_quartz/d_hematite: 1.604
+
+Interpretation: Higher density hematite settles faster than same-size quartz.
+However, particle-size overlap causes equal-settling combinations; density and size both matter.
+The dense slurry concentration and mineral-specific PSD/liberation data limit any claim of actual plant separation.
+The SEP block's fixed component split is an Aspen specification, not a mechanistic gravity-settling prediction.
